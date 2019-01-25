@@ -6,6 +6,7 @@ Developed by: Ayman Said
 Jan-2019
 """
 
+import os
 import csv
 
 INPUT_FILE_NAME = "TESTsoccer_players.csv"
@@ -56,17 +57,18 @@ def distribution_validity(teams_amount, *groups):
         else:
             result = True
             # we can have an even distribution
-    except ZeroDivisionError
+    except ZeroDivisionError:
+            print("League teams amount shouldn't be Zero!!!")
     return result
 
 if __name__ == "__main__":
 
-
-    # divide and output to teams.txt file
+    # clear the screen
+    os.system("cls" if os.name == "nt" else "clear")    
 
     # Read ​& store the ​supplied ​CSV ​file into data structures
     experienced_players, inexperienced_players = read_input(INPUT_FILE_NAME)
-    valid = distribution_validity(experienced_players, inexperienced_players, len(TEAMS))
+    distribution_validity(experienced_players, inexperienced_players, len(TEAMS))
 
     # analyze input validity to goal (if the number is dividable)
 
