@@ -8,9 +8,11 @@ Jan-2019
 
 import os
 import csv
+import random
 
 INPUT_FILE_NAME = "TESTsoccer_players.csv"
 TEAMS = ['Dragons', 'Sharks', 'Raptors']
+
 
 
 def read_input(file_name):
@@ -23,15 +25,33 @@ def read_input(file_name):
 
     experienced = []
     inexperienced = []
+    column_of_experience = 'Soccer Experience'
+    f_exit = True
 
-    with open(file_name) as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            if (row['Soccer Experience']).lower() == 'yes':
-                experienced.append(row)
-            else:
-                inexperienced.append(row)
-    
+    try:
+        with open(file_name) as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if (row[column_of_experience]).lower() == 'yes':
+                    experienced.append(row)
+                else:
+                    inexperienced.append(row)
+
+    except KeyError:
+        print("Expected column: '{}'\nIS NOT FOUND in file {}".format(column_of_experience, file_name))
+
+    except FileNotFoundError:
+        print("The file: {} is not found.".format(file_name))
+
+    except Exception as e:
+        print("Error in input file: {}\n{}".format(file_name, e))
+
+    else:
+        f_exit = False
+
+    if f_exit:
+        exit(1)  # Exits the program due to the caught errors
+
     return experienced, inexperienced
 
 
@@ -46,31 +66,46 @@ def distribution_validity(teams_amount, *groups):
 
     try:
         if len(groups[0] + groups[1]) == 0 or len(groups[0] + groups[1]) % teams_amount:
-            # no sufficient total players for even distribution!
-            print('we have {} players,  can not have even distribution for {} teams!\n'.upper().
-                  format(len(groups[0] + groups[1]), teams_amount))
+            # total players number id not sufficient for even distribution!
+            print('in total we have {} players.\nSorry, can not have even distribution for {} teams!\n'.upper()
+                  .format(len(groups[0] + groups[1]), teams_amount))
             # print('Please review the players list in the given file')
         elif len(groups[0]) % teams_amount or len(groups[1]) % teams_amount:
-            # one of the groups is not valid for even distribution
-            print('Experienced\Inexperienced players can not be evenly distributed for {} teams\n'.upper().
-                  format(teams_amount))
+            for group in groups:
+                if len(group) % teams_amount:
+                    group_label = 'Experienced' if str(group[0]['Soccer Experience']).lower() == 'yes' \
+                        else 'Inexperienced'
+                    print('\n{} players: {}\nCan not be evenly distributed among {} teams'
+                          .format(group_label, len(group), teams_amount))
         else:
-            result = True
             # we can have an even distribution
+            print('Great, even distribution is feasible...')
+            result = True
+
     except ZeroDivisionError:
-            print("League teams amount shouldn't be Zero!!!")
+            print("Teams amount shouldn't be a Zero!!!".upper())
+            exit(1)  # Exits the program due to the caught error
+
     return result
+
 
 if __name__ == "__main__":
 
     # clear the screen
-    os.system("cls" if os.name == "nt" else "clear")    
+    os.system("cls" if os.name == "nt" else "clear")
+    # Read & store the input CSV file into relevant data structures
+    # experienced_players, inexperienced_players = read_input(INPUT_FILE_NAME)
+    groups = read_input(INPUT_FILE_NAME)
+    # validate if even distribution is feasible
+    # f_distribute = distribution_validity(len(TEAMS), experienced_players, inexperienced_players)
+    f_distribute = distribution_validity(len(TEAMS), *groups)
 
-    # Read ​& store the ​supplied ​CSV ​file into data structures
-    experienced_players, inexperienced_players = read_input(INPUT_FILE_NAME)
-    distribution_validity(experienced_players, inexperienced_players, len(TEAMS))
+    if f_distribute:
+        # have a data structure for each team
+        teams = [{:}, {:}, {:}]
+        for group in groups:
+            for player in random.sample(group, 3):
 
-    # analyze input validity to goal (if the number is dividable)
-
-    
+            # randomly select 3 players (watch if group is empty) from group
+            # distribute 1 by 1 to the 3 teams
 
