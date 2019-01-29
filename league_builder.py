@@ -104,9 +104,13 @@ if __name__ == "__main__":
         # have a data structure for each team
         league = [{TEAMS[0]:[]}, {TEAMS[1]:[]}, {TEAMS[2]:[]}]
         for group in groups:
-            for player, team in zip(random.sample(group, 3), league):
-                (team.values()).append(player)
-                list(group).remove(player)
-            # randomly select 3 players (watch if group is empty) from group
-            # distribute 1 by 1 to the 3 teams
+            while group:
+                """for player, team in zip(random.sample(group, 3), league):
+                    (team.values()).append(player)
+                    list(group).remove(player)"""
+                for team in league:
+                    player = list(group).pop()
+                    list(team.values()).append(player)
+                # randomly select 3 players (watch if group is empty) from group
+                # distribute 1 by 1 to the 3 teams
 
