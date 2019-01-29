@@ -102,10 +102,11 @@ if __name__ == "__main__":
 
     if f_distribute:
         # have a data structure for each team
-        teams = [{:}, {:}, {:}]
+        league = [{TEAMS[0]:[]}, {TEAMS[1]:[]}, {TEAMS[2]:[]}]
         for group in groups:
-            for player in random.sample(group, 3):
-
+            for player, team in zip(random.sample(group, 3), league):
+                (team.values()).append(player)
+                list(group).remove(player)
             # randomly select 3 players (watch if group is empty) from group
             # distribute 1 by 1 to the 3 teams
 
