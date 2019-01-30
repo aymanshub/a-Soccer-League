@@ -116,3 +116,7 @@ dmypy.json
 .idea/workspace.xml
 .idea/misc.xml
 .idea/a-Soccer-League.iml
+.idea/workspace.xml
+*.xml
+*.xml
+*.xml

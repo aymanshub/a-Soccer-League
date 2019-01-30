@@ -9,10 +9,10 @@ Jan-2019
 import os
 import csv
 import random
+import datetime
 
-INPUT_FILE_NAME = "TESTsoccer_players.csv"
+INPUT_FILE_NAME = "soccer_players.csv"
 TEAMS = ['Dragons', 'Sharks', 'Raptors']
-
 
 
 def read_input(file_name):
@@ -55,7 +55,7 @@ def read_input(file_name):
     return experienced, inexperienced
 
 
-def distribution_validity(teams_amount, *groups):
+def distribution_validity(teams_amount, groups):
     """Validates if the groups members can be evenly distributed among the teams.
 
     :param teams_amount: number of teams to distribute the groups into.
@@ -89,6 +89,58 @@ def distribution_validity(teams_amount, *groups):
     return result
 
 
+def make_league_roster(teams_list, groups):
+
+    league = []
+    for i in range(len(teams_list)):
+        team = {teams_list[i]: []}
+        league.append(team)
+
+    for group in groups:
+        while group:
+            intial_group_length = len(group)
+            for team in league:
+                i = 0
+                for i in range(intial_group_length // len(teams_list)):
+                    player = group.pop(random.randrange(0, len(group)))
+                    team[list(team.keys())[0]].append(player)
+    return league
+
+
+def plot_league_roster(origin_league):
+    with open('teams.txt', 'w') as file:
+        for team in origin_league:
+            team_name = list(team.keys())[0]
+            file.write(team_name + '\n')
+            # for player in team[0] , team[list(team.keys())[0]][0]['Name']
+            for player in team[team_name]:
+                file.write('{Name}, {Soccer Experience}, {Guardian Name(s)}\n'.format(**player))
+            file.write('\n')
+
+
+def generate_welcome_letters(new_league):
+    # "_".join(name.split()).lower()
+    for team in new_league:
+        team_name = list(team.keys())[0]
+        for player in team[team_name]:
+            player_name = '{Name}'.format(**player)
+            with open("_".join(player_name.split()).lower() + '.txt', 'w') as file:
+                file.write('Dear {Guardian Name(s)},\n\n'.format(**player))
+                file.write("We'd like to inform & invite you for the 1st practice for:\n")
+                file.write('Player: {Name}\n'.format(**player))
+                file.write('Team: {}\n'.format(team_name))
+                dt = datetime.datetime.now()
+                dts = dt.strftime('%x %X')
+                file.write('1st practice date & time: {}'.format(dts))
+    """
+    Dear [guardian name],
+
+    We'd like to inform & invite you for the 1st practice for:
+    Player name:
+    Team name:
+    1st practice Date & time:
+    """
+
 if __name__ == "__main__":
 
     # clear the screen
@@ -99,19 +151,16 @@ if __name__ == "__main__":
     # validate if even distribution is feasible
     # f_distribute = distribution_validity(len(TEAMS), experienced_players, inexperienced_players)
 
-    if distribution_validity(len(TEAMS), *groups):
-        # have a data structure for each team
-        league = []
-        for i in range(len(TEAMS)):
-            team = {TEAMS[i]: []}
-            league.append(team)
+    if distribution_validity(len(TEAMS), groups):
+        # call a function that will do the actual distribution
+        # params: league, groups
 
-        for group in groups:
-            while group:
-                for team in league:
-                        player = group.pop(random.randrange(0, len(group)))
-                        team[list(team.keys())[0]].append(player)
+        league = make_league_roster(TEAMS, groups)
+        plot_league_roster(league)
+        generate_welcome_letters(league)
+        """
+        for team in league:
+            print(team)
+        """
 
-                # randomly select 3 players (watch if group is empty) from group
-                # distribute 1 by 1 to the 3 teams
 
