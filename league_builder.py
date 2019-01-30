@@ -102,15 +102,22 @@ if __name__ == "__main__":
 
     if f_distribute:
         # have a data structure for each team
-        league = [{TEAMS[0]:[]}, {TEAMS[1]:[]}, {TEAMS[2]:[]}]
+        league = []
+        for i in range(len(TEAMS)):
+            team = {TEAMS[i]: []}
+            league.append(team)
+
         for group in groups:
             while group:
-                """for player, team in zip(random.sample(group, 3), league):
-                    (team.values()).append(player)
-                    list(group).remove(player)"""
                 for team in league:
-                    player = list(group).pop()
-                    list(team.values()).append(player)
+                    try:
+                        #copy_group = group[:]
+                        rand = random.randrange(0, len(group))
+                        player = group.pop(rand)
+                        team[list(team.keys())[0]].append(player)
+                    except IndexError:
+                        print("what happened?  pop index out of range? ")
+
                 # randomly select 3 players (watch if group is empty) from group
                 # distribute 1 by 1 to the 3 teams
 
