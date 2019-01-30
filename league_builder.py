@@ -98,9 +98,8 @@ if __name__ == "__main__":
     groups = read_input(INPUT_FILE_NAME)
     # validate if even distribution is feasible
     # f_distribute = distribution_validity(len(TEAMS), experienced_players, inexperienced_players)
-    f_distribute = distribution_validity(len(TEAMS), *groups)
 
-    if f_distribute:
+    if distribution_validity(len(TEAMS), *groups):
         # have a data structure for each team
         league = []
         for i in range(len(TEAMS)):
@@ -110,13 +109,8 @@ if __name__ == "__main__":
         for group in groups:
             while group:
                 for team in league:
-                    try:
-                        #copy_group = group[:]
-                        rand = random.randrange(0, len(group))
-                        player = group.pop(rand)
+                        player = group.pop(random.randrange(0, len(group)))
                         team[list(team.keys())[0]].append(player)
-                    except IndexError:
-                        print("what happened?  pop index out of range? ")
 
                 # randomly select 3 players (watch if group is empty) from group
                 # distribute 1 by 1 to the 3 teams

@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/league_builder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="115" column="48" lean-forward="true" selection-start-line="115" selection-start-column="48" selection-end-line="115" selection-end-column="48" />
+            <state relative-caret-position="349">
+              <caret line="111" column="45" selection-start-line="111" selection-start-column="45" selection-end-line="111" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -22,7 +22,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/random.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
+            <state relative-caret-position="3480">
               <caret line="183" selection-start-line="183" selection-end-line="183" />
             </state>
           </provider>
@@ -31,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
+            <state relative-caret-position="6160">
               <caret line="309" selection-start-line="309" selection-end-line="309" />
             </state>
           </provider>
@@ -57,7 +57,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="13" />
     <option name="y" value="-4" />
     <option name="width" value="1616" />
@@ -146,15 +146,15 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32928476" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4898606" weight="0.23726977" />
       <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.48479086" visible="true" weight="0.30985916" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" sideWeight="0.49746513" weight="0.32928476" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4949303" weight="0.26585695" />
-      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.4898606" weight="0.32928476" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4949303" weight="0.2654388" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.4898606" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.51520914" side_tool="true" weight="0.3994602" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -190,14 +190,34 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/league_builder.py</url>
-          <line>114</line>
+          <line>110</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/league_builder.py</url>
+          <line>101</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>list(team.keys())[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>team.keys()[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>team.keys()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>len(group)</expression-string>
         <language-id>Python</language-id>
@@ -228,21 +248,6 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>team.get(0)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>team.keys(0)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>team.keys()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
@@ -260,24 +265,24 @@
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_python-collections.zip/Python Collections/s6v4/dungeon_game.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/_collections_abc.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/abc.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
+    <entry file="file://$PROJECT_DIR$/league_builder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        <state relative-caret-position="349">
+          <caret line="111" column="45" selection-start-line="111" selection-start-column="45" selection-end-line="111" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="3480">
           <caret line="183" selection-start-line="183" selection-end-line="183" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/league_builder.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="115" column="48" lean-forward="true" selection-start-line="115" selection-start-column="48" selection-end-line="115" selection-end-column="48" />
+        <state relative-caret-position="6160">
+          <caret line="309" selection-start-line="309" selection-end-line="309" />
         </state>
       </provider>
     </entry>
