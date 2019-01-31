@@ -11,8 +11,9 @@ import csv
 import random
 import datetime
 
-INPUT_FILE_NAME = "soccer_players.csv"
-TEAMS = ['Dragons', 'Sharks', 'Raptors']
+INPUT_FILE_NAME = "soccer_players.csv"  # CSV file name holding the players names
+TEAMS = ['Dragons', 'Sharks', 'Raptors']  # Teams names list that will host the players distribution.
+league_roster_filename = 'teams.txt'  # The league roster file name that will be generated and filled accordingly.
 
 
 def read_input(file_name):
@@ -81,7 +82,7 @@ def distribution_validity(teams_amount, groups):
                           .format(group_label, len(group), teams_amount))
         else:
             # we can have an even distribution
-            print('Great, even distribution is feasible...')
+            print('\t* Great, even distribution is achievable.')
             result = True
 
     except ZeroDivisionError:
@@ -117,16 +118,17 @@ def generate_league_roster(teams_list, groups):
     return league
 
 
-def write_league_roster(new_league):
+def write_league_roster(new_league, file_name):
     """ Writes the league roster in a text file, listing the team name, and each player on the team
-        including the player's information.
+    including the player's information.
 
     :param new_league: A dictionary of the teams, each team is a list of team players, each player is a dictionary
-            of his\her personal attributes.
+    including the player's information.
+    :param file_name: a string representing the text file name (including .txt extension)
+    that will hold the league roster.
     :return: None
     """
 
-    file_name = 'teams.txt'
     try:
         with open(file_name, 'w') as file:
             for team in new_league:
@@ -142,16 +144,17 @@ def write_league_roster(new_league):
 
 
 def write_welcome_letters(new_league):
-    """ Writes welcome letter to each of the players guardian(s), into a text file.
-        The function will generate a text file
-    :param new_league: new_league: A dictionary of the teams, each team is a list of team players, each player is a dictionary
-            of his\her personal attributes.
+    """ Creates text files, a text file per player in the new league roster, as a "welcome" letters
+    to the players' guardians.
+
+    :param new_league: A dictionary of the teams, each team is a list of team players, each player is a dictionary
+    including the player's information.
     :return: None
     """
     for team in new_league:
         team_name = list(team.keys())[0]
         for player in team[team_name]:
-            # unpacking the player information
+            # unpacking the player's name information
             player_name = '{Name}'.format(**player)
             file_name = "_".join(player_name.split()).lower() + '.txt'
             try:
@@ -174,18 +177,25 @@ if __name__ == "__main__":
 
     # clear the screen
     os.system("cls" if os.name == "nt" else "clear")
-    # Read & store the input CSV file into relevant data structures
-    # experienced_players, inexperienced_players = read_input(INPUT_FILE_NAME)
+    # Read the input CSV file into experienced and inexperienced groups
+    print('Welcome to the league builder program.\nReading input file...')
     groups = read_input(INPUT_FILE_NAME)
-    # validate if even distribution is feasible
-    # f_distribute = distribution_validity(len(TEAMS), experienced_players, inexperienced_players)
 
+    # validates if even distribution is feasible
+    print('Validating if even players distribution is achievable...')
     if distribution_validity(len(TEAMS), groups):
-        # call a function that will do the actual distribution
-        # params: league, groups
-
+        # generating and filling the league roster data structure
+        print('Building league roster...')
         league = generate_league_roster(TEAMS, groups)
-        write_league_roster(league)
+
+        # writing the league roster into a text file
+        print('Writing league roster into: {} file...'.format(league_roster_filename))
+        write_league_roster(league, league_roster_filename)
+
+        # writing welcome letters files
+        print('Writing welcome letters files...')
         write_welcome_letters(league)
+
+        print("\nAll set.\ncongratulations for the new League".upper())
 
 
