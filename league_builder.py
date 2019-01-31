@@ -91,13 +91,13 @@ def distribution_validity(teams_amount, groups):
     return result
 
 
-def make_league_roster(teams_list, groups):
+def generate_league_roster(teams_list, groups):
     """Builds the league roster from the groups of experienced\inexperienced and the teams list
 
     :param teams_list: a list of the teams that will host the players given in the groups
     :param groups: experienced\inexperienced groups lists
-    :return: league, a dictionary of the teams, each team is a list of team players, each player is a dictionary of his\
-    her personal attributes.
+    :return: league, a dictionary of the teams, where each team is a list of team players and each player
+    is a dictionary including the player's information.
     """
     league = []  # the data structure that will host all the teams and their players
     # building the team names dictionary with empty players lists
@@ -117,8 +117,8 @@ def make_league_roster(teams_list, groups):
     return league
 
 
-def plot_league_roster(new_league):
-    """ Writes the league roster in a text file listing the team name, and each player on the team
+def write_league_roster(new_league):
+    """ Writes the league roster in a text file, listing the team name, and each player on the team
         including the player's information.
 
     :param new_league: A dictionary of the teams, each team is a list of team players, each player is a dictionary
@@ -133,27 +133,41 @@ def plot_league_roster(new_league):
                 team_name = list(team.keys())[0]
                 file.write(team_name + '\n')
                 for player in team[team_name]:
+                    # unpacking the player information
                     file.write('{Name}, {Soccer Experience}, {Guardian Name(s)}\n'.format(**player))
                 file.write('\n')
     except Exception as e:
         print('A problem has occurred while trying to write a file: {}\n{}'.format(file_name, e))
+        exit(1)  # Exits the program due to the caught error
 
 
-def generate_welcome_letters(new_league):
-
+def write_welcome_letters(new_league):
+    """ Writes welcome letter to each of the players guardian(s), into a text file.
+        The function will generate a text file
+    :param new_league: new_league: A dictionary of the teams, each team is a list of team players, each player is a dictionary
+            of his\her personal attributes.
+    :return: None
+    """
     for team in new_league:
         team_name = list(team.keys())[0]
         for player in team[team_name]:
+            # unpacking the player information
             player_name = '{Name}'.format(**player)
-            with open("_".join(player_name.split()).lower() + '.txt', 'w') as file:
-                file.write('Dear {Guardian Name(s)},\n\n'.format(**player))
-                file.write("We'd like to inform & invite you for the 1st practice for:\n")
-                file.write('Player: {Name}\n'.format(**player))
-                file.write('Team: {}\n'.format(team_name))
-                dt = datetime.datetime(2019, 4, 2, 18, 00)
-                dts = dt.strftime('%x %X')
-                file.write('1st practice date & time: {}'.format(dts[:-3]))
-                file.write('\n\nThanks,\nLeague Management.')
+            file_name = "_".join(player_name.split()).lower() + '.txt'
+            try:
+                with open(file_name, 'w') as file:
+                    file.write('Dear {Guardian Name(s)},\n\n'.format(**player))
+                    file.write("We'd like to inform & invite you for the 1st practice for:\n")
+                    file.write('Player: {}\n'.format(player_name))
+                    file.write('Team: {}\n'.format(team_name))
+                    dt = datetime.datetime(2019, 4, 2, 18, 00)
+                    dts = dt.strftime('%x %X')
+                    file.write('1st practice date & time: {}'.format(dts[:-3]))
+                    file.write('\n\nThanks,\nLeague Management.')
+            except Exception as e:
+                print('A problem has occurred while trying to write a file: {}\n{}'.
+                      format(file_name, e))
+                exit(1)  # Exits the program due to the caught error
 
 
 if __name__ == "__main__":
@@ -170,8 +184,8 @@ if __name__ == "__main__":
         # call a function that will do the actual distribution
         # params: league, groups
 
-        league = make_league_roster(TEAMS, groups)
-        plot_league_roster(league)
-        generate_welcome_letters(league)
+        league = generate_league_roster(TEAMS, groups)
+        write_league_roster(league)
+        write_welcome_letters(league)
 
 
